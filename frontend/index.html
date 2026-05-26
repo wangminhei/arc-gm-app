@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arc GM Hub - On-chain Good Morning App</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Ethers.js v6 CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.0/ethers.umd.min.js"></script>
+</head>
+<body>
+  <div class="glass-background"></div>
+  
+  <div class="app-container">
+    <!-- Header -->
+    <header class="main-header">
+      <div class="logo">
+        <i data-lucide="sun" class="logo-icon animate-spin-slow"></i>
+        <span>Arc GM Hub</span>
+      </div>
+      <div class="header-actions">
+        <div class="network-badge">
+          <span class="status-dot pulse"></span>
+          <span>Arc Testnet</span>
+        </div>
+        <button id="btn-connect" class="btn btn-connect">
+          <i data-lucide="wallet"></i>
+          <span id="connect-text">Connect Wallet</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Dashboard Grid -->
+    <main class="main-grid">
+      <!-- Left Column: Actions & Stats -->
+      <section class="left-col">
+        <!-- Stats Card -->
+        <div class="card stats-card">
+          <div class="card-header">
+            <span class="card-title">GLOBAL ACTIVITY</span>
+            <i data-lucide="activity" class="text-primary"></i>
+          </div>
+          <div class="card-body">
+            <h1 id="total-gms">0</h1>
+            <p class="text-muted">Total Good Mornings recorded on-chain</p>
+          </div>
+        </div>
+
+        <!-- Action Card -->
+        <div class="card action-card">
+          <div class="card-header">
+            <span class="card-title">SAY GOOD MORNING</span>
+            <i data-lucide="message-square-plus" class="text-success"></i>
+          </div>
+          <div class="card-body">
+            <div class="input-group">
+              <label for="gm-message">Your Message</label>
+              <input type="text" id="gm-message" placeholder="GM! ☀️ Have a productive day!" value="GM! ☀️">
+            </div>
+            <button id="btn-say-gm" class="btn btn-primary btn-full-width" disabled>
+              <i data-lucide="send"></i>
+              <span>Say GM!</span>
+            </button>
+            
+            <div class="gas-tip">
+              <i data-lucide="info" class="gas-tip-icon"></i>
+              <p>
+                <strong>Gas Tip</strong>: Arc uses <strong>USDC</strong> as the native gas token. Make sure you request some from the <a href="https://faucet.circle.com/" target="_blank">Circle Faucet</a> to write to the contract.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Live History Feed -->
+      <section class="right-col">
+        <div class="card feed-card">
+          <div class="card-header">
+            <span class="card-title">ON-CHAIN FEED</span>
+            <span class="feed-indicator">
+              <i data-lucide="radio" class="feed-live-icon pulse-live"></i>
+              <span>Live Updates</span>
+            </span>
+          </div>
+          
+          <div class="feed-entries" id="gm-history-list">
+            <!-- Loading State -->
+            <div class="feed-placeholder" id="feed-loader">
+              <i data-lucide="loader-2" class="animate-spin text-primary" size="24"></i>
+              <span>Connecting to Arc network...</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">Address Copied!</div>
+
+  <!-- Application Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
